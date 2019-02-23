@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ning4256.mapping.AllMapper">
+	<!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复 使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型 
+		resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回 User类就是users表所对应的实体类 -->
+
+	<!-- 开启二级缓存 -->
+	<cache></cache>
+
+	<!-- 根据id查询得到一个user对象 -->
+<!-- 	<select id="getUserById" parameterType="int" resultType="_USERS"> -->
+<!-- 		select * -->
+<!-- 		from users where id=#{id} -->
+<!-- 	</select> -->
+
+	<!-- 添加用户 -->
+<!-- 	<insert id="addUser" parameterType="_USERS"> -->
+<!-- 		insert into users(user_acc, -->
+<!-- 		user_pass,user_name) values(#{user_acc}, #{user_pass},#{user_name}) -->
+<!-- 	</insert> -->
+
+	<!-- 删除用户 -->
+<!-- 	<delete id="deleteUserById" parameterType="int"> -->
+<!-- 		delete from users -->
+<!-- 		where id=#{id} -->
+<!-- 	</delete> -->
+
+	<!-- 修改用户 -->
+<!-- 	<update id="updateUser" parameterType="_USERS"> -->
+<!-- 		update users set -->
+<!-- 		name=#{name}, age=#{age} where id=#{id} -->
+<!-- 	</update> -->
+
+	<!-- 查询表的所有信息 -->
+<!-- 	<select id="getAllUser" parameterType="int" resultType="_USERS"> -->
+<!-- 		select * -->
+<!-- 		from users -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getBookById" parameterType="int" resultType="_BOOK"> -->
+<!-- 		select * -->
+<!-- 		from book where book_id=#{book_id} -->
+<!-- 	</select> -->
+
+	<!-- 添加图书 -->
+<!-- 	<insert id="addBook" parameterType="_BOOK"> -->
+<!-- 		insert into book(book_name, -->
+<!-- 		book_author, book_price, book_publish, -->
+<!-- 		book_date, book_des,book_count) -->
+<!-- 		values(#{book_name}, #{book_author}, -->
+<!-- 		#{book_price}, #{book_publish}, -->
+<!-- 		#{book_date}, #{book_des}, -->
+<!-- 		#{book_count}); -->
+<!-- 	</insert> -->
+
+
+	<!-- 删除图书 -->
+<!-- 	<delete id="deleteBookById" parameterType="int"> -->
+<!-- 		delete from book where -->
+<!-- 		book_id=#{book_id} -->
+<!-- 	</delete> -->
+
+	<!-- 修改用户 -->
+	<!-- <update id="updateUser" parameterType="_USERS" > update users set name=#{name}, 
+		age=#{age} where id=#{id} </update> -->
+
+	<!-- 查询图书表的所有信息 -->
+<!-- 	<select id="getAllBook" parameterType="int" resultType="_BOOK"> -->
+<!-- 		select * -->
+<!-- 		from book -->
+<!-- 	</select> -->
+
+	<!-- 方式二：嵌套查询：通过执行另外一个SQL映射语句来返回预期的复杂类型 SELECT * FROM class WHERE c_id=1; 
+		SELECT * FROM teacher WHERE t_id=1 //1 是上一个查询得到的teacher_id的值 -->
+
+	<!-- 使用resultMap映射实体类和字段之间的一一对应关系 -->
+<!-- 	<resultMap type="com.ning4256.pojo.Users" id="getBorrowIdByUserId"> -->
+<!-- 		<result property="borrow_id" column="borrow_id" /> -->
+<!-- 		<result property="user_id" column="user_id" /> -->
+<!-- 		<association property="com.ning4256.pojo.Borrow" javaType="com.ning4256.pojo.Borrow" select="getBookIdByBorrowId"> -->
+<!-- 			<id property="book_id" column="book_id"></id> -->
+<!-- 		</association> -->
+<!-- 		<collection property="com.ning4256.pojo.Book" ofType="com.ning4256.pojo.Book" column="book_id" -->
+<!-- 			select="getBookByBorrowId"></collection> -->
+<!-- 	</resultMap> -->
+
+<!-- 	<select id="getBorrowIdByUserId" parameterType="com.ning4256.pojo.Users" resultMap="com.ning4256.pojo.Users"> -->
+<!-- 		select * -->
+<!-- 		from users where user_id=#{user_id} -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getBookIDByBorrowId" parameterType="com.ning4256.pojo.Users" resultType="com.ning4256.pojo.Borrow"> -->
+<!-- 		SELECT * FROM borrow WHERE user_id=#{user_id} -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getBookByBorrowId" parameterType="com.ning4256.pojo.Borrow" resultType="com.ning4256.pojo.Book"> -->
+<!-- 		SELECT * FROM book WHERE book_id=#{book_id} -->
+<!-- 	</select> -->
+	
+	<select id="getBooks999" parameterType="_USERS" resultType="com.ning4256.pojo.Book">
+		CALL pro_book(#{user_id});
+	</select>
+</mapper>
